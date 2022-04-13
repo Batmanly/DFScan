@@ -27,6 +27,7 @@ you can add search engine in the search engine folder with dork and keyword. som
 ![](with_dork.gif)
 as like before add curl command to in the search engine folder with the name you want.
 
+### For Tor Service , i use this.
 ```text
 For Windows and Mac: https://github.com/jeremy-jr-benthum/onion-browser-button/releases you can use this.
 ```
