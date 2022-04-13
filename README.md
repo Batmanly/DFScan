@@ -7,7 +7,7 @@ Clone Repository: git clone https://github.com/Batmanly/DFScan
 Install Dependencies: pip install -r requirements.txt
 Run: python3 main.py
 ```
-
+First of all You must already be already logged forum , url will open direclty to your default browser.
 For usage, you must add your forum CURL Request in the folder as the shown in the example.
 
 Search KEYWORD must be KEYWORD in the CURL Request.Be Carefully !!!
