@@ -22,7 +22,7 @@ There is three folders in the project.
 For each folder there is one thread is working , in the timers folder forum has to wait for 40 second for each new tab, because some websites has limit for scan keyword.
 ![](folder.gif)
 if your forum doesn't have limit for scanning you must and untimers folder your curl request.
-you can add search engine in the search engine tab with dork and keyword. some forum doesn't let you scan 3-4 lenght keyword , so you can use google dork for this keywords.
+you can add search engine in the search engine folder with dork and keyword. some forum doesn't let you scan 3-4 lenght keyword , so you can use google dork for this keywords.
 
 ![](with_dork.gif)
 as like before add curl command to in the search engine folder with the name you want.
