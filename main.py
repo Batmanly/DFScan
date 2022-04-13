@@ -7,12 +7,20 @@ import uncurl
 
 from keyword_parse import keywords, search_engine_keyword
 from parse_curl import websites_with_timer, websites_without_timer, search_engines
+from stem import Signal
+from stem.control import Controller
 
+# signal TOR for a new connection
+def renew_connection():
+    with Controller.from_port(port = 9051) as controller:
+        controller.authenticate(password="SET_PASSWORD_HERE")
+        controller.signal(Signal.NEWNYM)
 
 
 
 # https://avilpage.com/2018/03/convert-browser-requests-to-python-requests.html
 def get_tor_session():
+    renew_connection()
     session = requests.session()
     # Tor uses the 9050 port as the default socks port
     session.proxies = {'http':  'socks5://127.0.0.1:9050',
