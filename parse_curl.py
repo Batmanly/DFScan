@@ -11,17 +11,26 @@ read_search_engines = glob.glob('search_engine/*')
 # read all content of files in the directory
 for i in read_websites_untimers:
     with open(i, 'r') as f:
-        curl_command = f.read().replace('\n', '').replace('\ ', '')
-        websites_without_timer.append(curl_command)
+        try:
+            curl_command = f.read().replace('\n', '').replace('\ ', '')
+            websites_without_timer.append(curl_command)
+        except:
+            pass
 # read all content of files in the directory
 for i in read_websites_with_timers:
     with open(i, 'r') as f:
-        curl_command = f.read().replace('\n', '').replace('\ ', '')
-        websites_with_timer.append(curl_command)
+        try:
+            curl_command = f.read().replace('\n', '').replace('\ ', '')
+            websites_with_timer.append(curl_command)
+        except:
+            pass
 for i in read_search_engines:
     with open(i, 'r') as f:
-        curl_command = f.read().replace('\n', '').replace('\ ', '')
-        search_engines.append(curl_command)
+        try:
+            curl_command = f.read().replace('\n', '').replace('\ ', '')
+            search_engines.append(curl_command)
+        except:
+            pass
 
 if __name__ == '__main__':
     # write content of files in the directory

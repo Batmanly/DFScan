@@ -1,10 +1,14 @@
 import requests
+
+
 def get_tor_session():
     session = requests.session()
     # Tor uses the 9050 port as the default socks port
-    session.proxies = {'http':  'socks5://127.0.0.1:9050',
+    session.proxies = {'http': 'socks5://127.0.0.1:9050',
                        'https': 'socks5://127.0.0.1:9050'}
     return session
+
+
 # Make a request through the Tor connection
 # IP visible through Tor
 session = get_tor_session()
