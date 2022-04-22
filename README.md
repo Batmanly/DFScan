@@ -1,5 +1,10 @@
 # Darkweb Forum && Keyword Scanner
 It's a simple tool that can be used to scan the Darkweb for keywords.
+#### Feautures
+- Tor proxy support
+- Multiple threads as length of your forum count
+- Scanning for multiple keywords
+- Scanning for multiple forums
 
 #### How to use:
 ```text
