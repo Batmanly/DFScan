@@ -23,9 +23,22 @@ def get_tor_session():
     renew_connection()
     session = requests.session()
     # Tor uses the 9050 port as the default socks port
-    session.proxies = {'http': 'socks5://127.0.0.1:9050',
-                       'https': 'socks5://127.0.0.1:9050'}
+    session.proxies = {
+        'http': 'socks5://127.0.0.1:9050',
+        'https': 'socks5://127.0.0.1:9050'
+    }
     return session
+
+
+def false_request(request: str):
+    with open('false.txt', 'r', encoding='utf-8') as f:
+        false = f.readlines()
+    for i in false:
+        i = i.strip('\n')
+        print(i)
+        if i in request:
+            return False
+    return True
 
 
 def make_request(curl_command):
@@ -38,11 +51,15 @@ def make_request(curl_command):
         print("TOR IP" + session.get("http://httpbin.org/ip").text)
 
         # send request with Tor
-        req = session.post(parsed_curl.url, headers=parsed_curl.headers, cookies=parsed_curl.cookies,
+        req = session.post(parsed_curl.url,
+                           headers=parsed_curl.headers,
+                           cookies=parsed_curl.cookies,
                            params=parsed_curl.data)
         # send request with your ip
         # req = requests.post(parsed_curl.url, headers=parsed_curl.headers, cookies=parsed_curl.cookies, params=parsed_curl.data)
-        webbrowser.open(req.url)
+
+        if (false_request(req)):
+            webbrowser.open(req.url)
 
     except Exception as e:
         print(e)
@@ -78,10 +95,12 @@ def open_with_search_engine(curl_command):
     for i in range(len(search_engine_keyword)):
         # look for the first keyword
         if 'KEYWORD' in curl_command:
-            curl_command = curl_command.replace('KEYWORD', search_engine_keyword[i])
+            curl_command = curl_command.replace('KEYWORD',
+                                                search_engine_keyword[i])
         # change changed keyword
         else:
-            curl_command = curl_command.replace(search_engine_keyword[i - 1], search_engine_keyword[i])
+            curl_command = curl_command.replace(search_engine_keyword[i - 1],
+                                                search_engine_keyword[i])
         # send request
         make_request(curl_command)
         time.sleep(40)
@@ -90,16 +109,20 @@ def open_with_search_engine(curl_command):
 def multi_threading(web_list, function):
     threads = []
     for i in web_list:
-        t = Thread(target=function, args=[i, ])
+        t = Thread(target=function, args=[
+            i,
+        ])
         t.start()
         threads.append(t)
 
 
 t1 = Thread(target=multi_threading, args=[websites_with_timer, with_timer])
-t2 = Thread(target=multi_threading, args=[websites_without_timer, without_timer])
-t3 = Thread(target=multi_threading, args=[search_engines, open_with_search_engine])
+t2 = Thread(target=multi_threading,
+            args=[websites_without_timer, without_timer])
+t3 = Thread(target=multi_threading,
+            args=[search_engines, open_with_search_engine])
 
 if __name__ == '__main__':
     t1.start()
-    t2.start()
-    t3.start()
+    #t2.start()
+    #t3.start()
