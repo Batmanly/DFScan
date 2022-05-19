@@ -13,7 +13,7 @@ with open('keyword.txt', 'r') as f:
 
 for i in read_keyword:
     # extract domain name from the readed content and append it to keywords list , for use in the main.py
-    if len(i) <= 6:
+    if len(i) <= 7:
         search_engine_keyword.append(i)
     else:
         keywords.append(tldextract.extract(i).domain)
