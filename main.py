@@ -7,7 +7,7 @@ import uncurl
 from stem import Signal
 from stem.control import Controller
 
-from keyword_parse import keywords, search_engine_keyword
+from keyword_parse import keywords, search_engine_keyword, search_engine_domain_tld
 from parse_curl import websites_with_timer, websites_without_timer, search_engines
 
 
@@ -99,9 +99,18 @@ def open_with_search_engine(curl_command):
         else:
             curl_command = curl_command.replace(search_engine_keyword[i - 1],
                                                 search_engine_keyword[i])
-        # send request
-        make_request(curl_command)
-        time.sleep(40)
+        for j in range(len(search_engine_domain_tld)):
+            # send request change domain.
+            if 'test.com' in curl_command:
+                curl_command = curl_command.replace(
+                    'test.com', search_engine_domain_tld[j])
+            else:
+                curl_command = curl_command.replace(
+                    search_engine_domain_tld[j - 1],
+                    search_engine_domain_tld[j])
+
+            make_request(curl_command)
+            time.sleep(0.2)
 
 
 def multi_threading(web_list, function):
